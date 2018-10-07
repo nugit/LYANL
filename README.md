@@ -26,7 +26,7 @@ We're looking to support these languages for a start:
 - Breadth First Search
 - Binary Search
 
-## Setting up GitHub Pages with Jerkyll locally
+## (Optional) Setting up GitHub Pages with Jerkyll locally
 (More information can be found [here](https://help.github.com/articles/setting-up-your-github-pages-site-locally-with-jekyll/))
 1. Open Terminal
 2. Check whether you have Ruby 2.1.0 or higher installed:
@@ -45,6 +45,6 @@ $ bundle install
 ```
 6. In the root directory of your local Jekyll site repository, run
 ```
-bundle exec jekyll serve
+$ bundle exec jekyll serve
 ```
 7. Preview your local Jekyll site in your web browser at `http://localhost:4000`.
