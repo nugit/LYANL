@@ -1,4 +1,30 @@
 # Learn Yourself a New Language ([LYANL](https://nugit.github.io/LYANL/))
+This repository encourages anyone to share code snippets of standard algorithms in any language of their liking to help themselves/others pick up a new programming language!
+
+To contribute, fork this repository and make a pull request with your changes.
+
+### Languages:
+We're looking to support these languages for a start:
+- Java
+- JavaScript
+- Python
+- Ruby
+- Scala
+
+### Sort Algorithms:
+- Selection Sort
+- Bubble Sort
+- Insertion Sort
+- Merge Sort
+- Quick Sort
+- Bucket Sort
+- Heap Sort
+- Counting Sort
+
+### Search Algorithms:
+- Depth First Search
+- Breadth First Search
+- Binary Search
 
 ## Setting up GitHub Pages with Jerkyll locally
 (More information can be found [here](https://help.github.com/articles/setting-up-your-github-pages-site-locally-with-jekyll/))
