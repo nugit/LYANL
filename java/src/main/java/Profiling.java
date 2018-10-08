@@ -4,11 +4,20 @@ import sort.Options.ORDER;
 
 
 public class Profiling {
+  /*
+    Use this as the program's entry point, to experiment with Java, or
+    Run profiling: mvn compile exec:java -Dexec.mainClass=Profiling -Dexec.args=""
+   */
   public static void main(String[] args) {
-    System.out.println("Profiling");
+    long start = System.currentTimeMillis();
 
-    List<Integer> array = Arrays.asList(3, 1, 4, 2, -1, 0);
-    BubbleSort.sort(array, ORDER.ASCENDING);
-    System.out.println(array);
+    List<Integer> array = new ArrayList<Integer>();
+    for (int i = 0; i < 1000000; ++i) {
+      array.add(1000000-i);
+    }
+    BubbleSort.sort(array);
+
+    long elapsedTimeMillis = System.currentTimeMillis()-start;
+    System.out.println("Bubble sort for " + String.valueOf(array.size()) + " elements: " + elapsedTimeMillis);
   }
 }
