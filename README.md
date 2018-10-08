@@ -4,12 +4,12 @@ This repository encourages anyone to share code snippets of standard algorithms 
 To contribute, fork this repository and make a pull request with your changes.
 
 ### Languages:
-We're looking to support these languages for a start:
-- Java
-- JavaScript
-- Python
-- Ruby
-- Scala
+We're looking to support these languages for a start (version in parenthesis):
+- Java (8)
+- JavaScript (ES6+)
+- Python (2.7+)
+- Ruby (2.4+)
+- Scala (2.12+)
 
 ### Sort Algorithms:
 - Selection Sort
