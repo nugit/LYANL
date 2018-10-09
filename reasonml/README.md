@@ -2,10 +2,10 @@
 
 ### Sort Algorithms:
 - Selection Sort
-- Bubble Sort
+- Bubble Sort ✔️
 - Insertion Sort
 - Merge Sort
-- Quick Sort
+- Quick Sort ✔️
 - Bucket Sort
 - Heap Sort
 - Counting Sort

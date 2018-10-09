@@ -4,7 +4,7 @@
 - Selection Sort
 - Bubble Sort
 - Insertion Sort
-- Merge Sort
+- Merge Sort ✔️
 - Quick Sort
 - Bucket Sort
 - Heap Sort
