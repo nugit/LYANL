@@ -1,24 +1,11 @@
-type passResult = {
-  seq: list(int),
-  perfectPass: bool,
-};
-
-let rec bubblePass = (~seq: list(int), ~perfectPass: bool=true, ()): passResult =>  {
-  switch (seq) {
-  | [] => { seq: [], perfectPass }
-  | [a] => { seq: [a], perfectPass }
-  | [a, b] when a <= b => { seq: [a, b], perfectPass }
-  | [a, b] => { seq: [b, a], perfectPass: false }
-  | [a, b, ...rest] when a <= b =>
-    let { seq as newSeq, perfectPass } = bubblePass(~seq = [b, ...rest], ~perfectPass = perfectPass, ());
-    { seq: [a, ...newSeq], perfectPass };
-  | [a, b, ...rest] =>
-    let { seq as newSeq } = bubblePass(~seq = [a, ...rest], ~perfectPass = false, ());
-    { seq: [b, ...newSeq], perfectPass: false };
+let rec quickSort = (list: list(int)): list(int) => {
+  switch(list) {
+  | [] => []
+  | [a] => [a]
+  | _ =>
+    let [pivot, ...rest] = list;
+    let left = List.filter(item => item <= pivot, rest);
+    let right = List.filter(item => item > pivot, rest);
+    List.concat([quickSort(left), [pivot], quickSort(right)]);
   };
-};
-
-let rec bubbleSort = (seq: list(int)): list(int) => {
-  let { seq as newSeq, perfectPass } = bubblePass(~seq = seq, ());
-  perfectPass ? seq : bubbleSort(newSeq);
 };
