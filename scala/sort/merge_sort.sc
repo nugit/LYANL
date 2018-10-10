@@ -12,7 +12,7 @@ object MergeSort {
     }
   }
 
-  def merge(predicate: (Int, Int) => Boolean, left: Seq[Int], right: Seq[Int]): Seq[Int] = {
+  private def merge(predicate: (Int, Int) => Boolean, left: Seq[Int], right: Seq[Int]): Seq[Int] = {
     left.length match {
       case 0 => right
       case _ => right.length match {
