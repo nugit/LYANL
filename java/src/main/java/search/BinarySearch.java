@@ -2,27 +2,27 @@ package search;
 
 import java.io.IOException;
 import java.util.Arrays;
-import java.util.stream.IntStream;
 
-public class BinarySearch {
-    public int recursiveSearch(int[] intArray, int searchInt) throws IOException {
-        boolean present = IntStream.of(intArray).anyMatch(x -> x == searchInt);
+public class BinarySearch<T> {
+    private T t;
+    public <T extends Comparable> int recursiveSearch(T[] typeArray, T searchItem) throws IOException {
+        boolean present = Arrays.stream(typeArray).anyMatch(searchItem::equals);
         if (!present) {
-            throw new IOException("Integer not present in array");
+            throw new IOException("Item not present in array");
         } else {
             int low = 0;
-            int high = intArray.length - 1;
-            Arrays.sort(intArray);
-            return recursiveSearch(low, high, intArray, searchInt);
+            int high = typeArray.length - 1;
+            Arrays.sort(typeArray);
+            return recursiveSearch(low, high, typeArray, searchItem);
         }
     }
-    public int recursiveSearch(int low, int high, int[] intArray, int searchInt) {
+    public <T extends Comparable> int recursiveSearch(int low, int high, T[] typeArray, T searchItem) {
         int mid = (high + low) / 2;
-        if (intArray[mid] != searchInt) {
-            if (searchInt < intArray[mid]) {
-                return recursiveSearch(low, mid - 1, intArray, searchInt);
+        if (typeArray[mid].compareTo(searchItem) != 0) {
+            if (typeArray[mid].compareTo(searchItem) > 0) {
+                return recursiveSearch(low, mid - 1, typeArray, searchItem);
             } else {
-                return recursiveSearch(mid + 1, high, intArray, searchInt);
+                return recursiveSearch(mid + 1, high, typeArray, searchItem);
             }
         } else {
             return mid;
