@@ -14,3 +14,11 @@
 - Depth First Search
 - Breadth First Search
 - Binary Search
+
+### Todos:
+- Expose algorithms as command line arguments to run from main
+- Generalise to allow String search in Binary Search
+
+Running the program:
+    $ mvn test
+    $ mvn compile exec:java -Dexec.mainClass=Main -Dexec.args="desiredAlgorithm"
