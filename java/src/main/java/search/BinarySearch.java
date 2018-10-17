@@ -3,8 +3,7 @@ package search;
 import java.io.IOException;
 import java.util.Arrays;
 
-public class BinarySearch<T> {
-    private T t;
+public class BinarySearch {
     public <T extends Comparable> int recursiveSearch(T[] typeArray, T searchItem) throws IOException {
         boolean present = Arrays.stream(typeArray).anyMatch(searchItem::equals);
         if (!present) {
@@ -16,7 +15,7 @@ public class BinarySearch<T> {
             return recursiveSearch(low, high, typeArray, searchItem);
         }
     }
-    public <T extends Comparable> int recursiveSearch(int low, int high, T[] typeArray, T searchItem) {
+    private <T extends Comparable> int recursiveSearch(int low, int high, T[] typeArray, T searchItem) {
         int mid = (high + low) / 2;
         if (typeArray[mid].compareTo(searchItem) != 0) {
             if (typeArray[mid].compareTo(searchItem) > 0) {
