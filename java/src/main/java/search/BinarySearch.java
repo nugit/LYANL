@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.Arrays;
 
 public class BinarySearch {
+    // Array is assumed to be sorted for the purposes of binary search
     public <T extends Comparable> int recursiveSearch(T[] typeArray, T searchItem) throws IOException {
         boolean present = Arrays.stream(typeArray).anyMatch(searchItem::equals);
         if (!present) {
@@ -11,7 +12,6 @@ public class BinarySearch {
         } else {
             int low = 0;
             int high = typeArray.length - 1;
-            Arrays.sort(typeArray);
             return recursiveSearch(low, high, typeArray, searchItem);
         }
     }
