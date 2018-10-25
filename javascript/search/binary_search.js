@@ -1,19 +1,16 @@
-// This function should be implemented, array is assumed to be sorted
+// Array is assumed to be sorted for the purposes of binary search. Return -1 if search item is not present
 function binarySearch(array, searchItem) {
-    var present = array.indexOf(searchItem);
-    if (present == -1) {
-        throw "Item not present in array";
-    } else {
-        return recursiveSearch(0, array.length - 1, array, searchItem);
-    }
+    return recursiveSearch(0, array.length - 1, array, searchItem);
 }
 
 function recursiveSearch(low, high, array, searchItem) {
-    var mid = Math.floor((high + low) / 2);
-    if (array[mid] != searchItem) {
-        if (array[mid] > searchItem) return recursiveSearch(low, mid - 1, array, searchItem);
-        return recursiveSearch(mid + 1, high, array, searchItem);
-    } else {
+    if (high >= low) {
+        const mid = Math.floor((high + low) / 2);
+        if (array[mid] !== searchItem) {
+            if (array[mid] > searchItem) return recursiveSearch(low, mid - 1, array, searchItem);
+            return recursiveSearch(mid + 1, high, array, searchItem);
+        } 
         return mid;
     }
+    return -1;
 }
