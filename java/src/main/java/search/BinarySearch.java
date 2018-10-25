@@ -1,23 +1,30 @@
 package search;
 
 import java.io.IOException;
+import java.util.Arrays;
 
 public class BinarySearch {
-    // Array is assumed to be sorted for the purposes of binary search. Return -1 if search item is not present
     public <T extends Comparable> int recursiveSearch(T[] typeArray, T searchItem) throws IOException {
-        int low = 0;
-        int high = typeArray.length - 1;
-        return recursiveSearch(low, high, typeArray, searchItem);
+        boolean present = Arrays.stream(typeArray).anyMatch(searchItem::equals);
+        if (!present) {
+            throw new IOException("Item not present in array");
+        } else {
+            int low = 0;
+            int high = typeArray.length - 1;
+            Arrays.sort(typeArray);
+            return recursiveSearch(low, high, typeArray, searchItem);
+        }
     }
     private <T extends Comparable> int recursiveSearch(int low, int high, T[] typeArray, T searchItem) {
-        if (high >= low) {
-            int mid = (high + low) / 2;
-            if (typeArray[mid].compareTo(searchItem) != 0) {
-                if (typeArray[mid].compareTo(searchItem) > 0) return recursiveSearch(low, mid - 1, typeArray, searchItem);
+        int mid = (high + low) / 2;
+        if (typeArray[mid].compareTo(searchItem) != 0) {
+            if (typeArray[mid].compareTo(searchItem) > 0) {
+                return recursiveSearch(low, mid - 1, typeArray, searchItem);
+            } else {
                 return recursiveSearch(mid + 1, high, typeArray, searchItem);
-            } 
+            }
+        } else {
             return mid;
         }
-        return -1;
     }
 }
