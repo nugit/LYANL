@@ -2,7 +2,7 @@
 
 ### Sort Algorithms:
 - Selection Sort
-- Bubble Sort
+- Bubble Sort ✔️
 - Insertion Sort
 - Merge Sort
 - Quick Sort
@@ -13,7 +13,7 @@
 ### Search Algorithms:
 - Depth First Search
 - Breadth First Search
-- Binary Search
+- Binary Search ✔️
 
 ### Data Structures:
 - Stack

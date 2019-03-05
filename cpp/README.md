@@ -2,7 +2,7 @@
 
 ### Sort Algorithms:
 - Selection Sort
-- Bubble Sort
+- Bubble Sort ✔️
 - Insertion Sort
 - Merge Sort
 - Quick Sort
