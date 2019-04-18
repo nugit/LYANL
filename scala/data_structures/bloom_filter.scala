@@ -1,63 +1,63 @@
 package data_structures
 
+import  scala.collection.BitSet
 import scala.util.hashing.MurmurHash3.stringHash
 import Math.{abs, ceil, log, pow, round}
 
 case class BloomFilter[A](
   nbOfItems: Int,
   falsePositiveProbability: Float,
-  private val array: Array[Boolean],
+  private val bitset: BitSet,
+  private val maxSize: Int,
   private val numberOfHashFunctions: Int,
   private val hashSeed: Int
 ) {
 
-  private val hashFunctions: Stream[String => Int] =
+  private lazy val hashFunctions: Stream[String => Int] =
     (1 to numberOfHashFunctions)
       .toStream
-      .map(i => (str: String) => abs(stringHash(str, hashSeed + i)) % array.length)
+      .map(i => (str: String) => abs(stringHash(str, hashSeed + i)) % maxSize)
 
   def +=(item: A): BloomFilter[A] = {
     val itemString = item.toString
-    val hashes = hashFunctions.map(_(itemString))
-    val updatedArray = hashes.foldLeft(array)((acc, hash) => acc.updated(hash, true))
-    this.copy(array=updatedArray)
+    copy(bitset=(this.bitset ++ hashFunctions.map(_(itemString))))
   }
 
   def ++=(items: Seq[A]): BloomFilter[A] = items.foldLeft(this)(_ += _)
 
   def mayContain(item: A): Boolean = {
     val itemString = item.toString
-    hashFunctions.forall(fn => array(fn(itemString)))
+    hashFunctions.forall(bitset contains _(itemString))
   }
 
   def approxNumberOfItems(): Int = {
-    val setBits = array.foldLeft(0)((acc, bit) => if (bit) acc + 1 else acc).toDouble
-    val totalBits = array.length.toDouble
+    val totalBits = maxSize.toDouble
     round(
-      (-totalBits / numberOfHashFunctions.toDouble) * log((1D - (setBits / totalBits)))
+      (-totalBits / numberOfHashFunctions.toDouble) * log((1D - (bitset.size.toDouble / totalBits)))
     ).toInt
   }
 }
 
 object BloomFilter {
 
-  private def getArraySize(nbOfItems: Int, falsePositiveProbability: Float): Int =
+  private def getMaxSize(nbOfItems: Int, falsePositiveProbability: Float): Int =
     ceil(
       abs(nbOfItems * log(falsePositiveProbability)).toDouble / log(1D / pow(log(2), 2).toDouble)
     ).toInt
 
-  private def getNumberOfHashFunctions(nbOfItems: Int, arraySize: Int): Int =
+  private def getNumberOfHashFunctions(nbOfItems: Int, maxSize: Int): Int =
     round(
-      (arraySize.toDouble / nbOfItems.toDouble) * log(2)
+      (maxSize.toDouble / nbOfItems.toDouble) * log(2)
     ).toInt
 
   def apply[A](nbOfItems: Int, falsePositiveProbability: Float): BloomFilter[A] = {
-    val arraySize = getArraySize(nbOfItems, falsePositiveProbability)
+    val maxSize = getMaxSize(nbOfItems, falsePositiveProbability)
     BloomFilter(
       nbOfItems=nbOfItems,
       falsePositiveProbability=falsePositiveProbability,
-      array=Array.ofDim[Boolean](arraySize),
-      numberOfHashFunctions=getNumberOfHashFunctions(nbOfItems, arraySize),
+      bitset=BitSet(),
+      maxSize=maxSize,
+      numberOfHashFunctions=getNumberOfHashFunctions(nbOfItems, maxSize),
       hashSeed=scala.util.Random.nextInt
     )
   }
