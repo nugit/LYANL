@@ -31,7 +31,7 @@ case class BloomFilter[A](
   }
 
   def approxNumberOfItems(): Int = {
-    val setBits = array.filter(identity).length.toDouble
+    val setBits = array.foldLeft(0)((acc, bit) => if (bit) acc + 1 else acc).toDouble
     val totalBits = array.length.toDouble
     round(
       (-totalBits / numberOfHashFunctions.toDouble) * log((1D - (setBits / totalBits)))
