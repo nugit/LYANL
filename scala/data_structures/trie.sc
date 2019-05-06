@@ -18,7 +18,7 @@ final case class Trie(
       .mkString("")
 
   def +=(word: String): Trie = {
-    def insertIndexes(indexes: Seq[Int], trie: Trie): Trie = {
+    def insertIndexes(indexes: Seq[Int], trie: Trie): Trie =
       indexes match {
         case head +: Nil => {
           val newSubTrie = trie.children(head).getOrElse(Trie()).copy(isFinal=true)
@@ -32,12 +32,11 @@ final case class Trie(
           trie.copy(trie.children.updated(head, Some(newSubTrie)))
         }
       }
-    }
 
     insertIndexes(getIndexesFromString(word), this)
   }
 
-  def ++=(words: Seq[String]): Trie = words.foldLeft(this)((acc, word) => acc += word)
+  def ++=(words: Seq[String]): Trie = words.foldLeft(this)(_ += _)
 
   def ++(trie: Trie): Trie = this ++= trie.keys
 
@@ -52,7 +51,6 @@ final case class Trie(
   }
 
   def keys(): List[String] = {
-
     def descendCharByChar(accumulator: Vector[Int], trie: Trie): List[Vector[Int]] =
       (0 to (trie.children.length - 1)).flatMap(index => {
         trie.children(index) match {
