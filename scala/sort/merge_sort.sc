@@ -13,7 +13,7 @@ object MergeSort {
   def sort[A](seq: Seq[A])(implicit comparisonPredicate: (A, A) => Boolean): Seq[A] =
     if (seq.length < 2) seq
     else {
-      val pivot = Math.round((seq.length - 1).toFloat / 2)
+      val pivot = seq.length / 2
       merge(
         comparisonPredicate,
         sort(seq take pivot),
