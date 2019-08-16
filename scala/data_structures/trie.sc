@@ -7,8 +7,9 @@ final case class Trie(
 
   private def getIndexesFromString: String => Seq[Int] =
     _
+      .toLowerCase
       .toCharArray
-      .map(_.toLower.charValue - 97) // 'a' is 97, 'b' is 98, etc
+      .map(_.charValue - 97) // 'a' is 97, 'b' is 98, etc
       .toList
 
   private def getStringFromIndexes: Seq[Int] => String =
@@ -17,7 +18,7 @@ final case class Trie(
       .map(_.toChar)
       .mkString("")
 
-  def +=(word: String): Trie = {
+  def :+(word: String): Trie = {
     def insertIndexes(indexes: Seq[Int], trie: Trie): Trie =
       indexes match {
         case head +: Nil => {
@@ -36,9 +37,9 @@ final case class Trie(
     insertIndexes(getIndexesFromString(word), this)
   }
 
-  def ++=(words: Seq[String]): Trie = words.foldLeft(this)(_ += _)
+  def ++(words: IterableOnce[String]): Trie = words.iterator.foldLeft(this)(_ :+ _)
 
-  def ++(trie: Trie): Trie = this ++= trie.keys
+  def ++(trie: Trie): Trie = this ++ trie.keys
 
   def contains(word: String): Boolean = {
     def endsOnLastIndex(indexes: Seq[Int], trie: Trie): Boolean =
@@ -93,5 +94,5 @@ object Trie {
     Trie(
       children=Array.fill[Option[Trie]](LatinAlphabetLength)(None),
       isFinal=false
-    ) ++= initialItems
+    ) ++ initialItems
 }
