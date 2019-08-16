@@ -22,7 +22,7 @@ class LinkedList {
       : this.next.length(soFar + 1)
   )
 
-  map = fn => (
+  map = unaryFn => (
     this.next === null
       ? this
       : new LinkedList(unaryFn(this.value), this.next.map(unaryFn))
