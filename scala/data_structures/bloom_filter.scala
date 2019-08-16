@@ -13,9 +13,9 @@ case class BloomFilter[A](
   private val hashSeed: Int,
 ) {
 
-  private lazy val hashFunctions: Stream[String => Int] =
+  private lazy val hashFunctions: LazyList[String => Int] =
     (1 to numberOfHashFunctions)
-      .toStream
+      .to(LazyList)
       .map(i => (str: String) => abs(stringHash(str, hashSeed + i)) % maxSize)
 
   def :+(item: A): BloomFilter[A] = {
