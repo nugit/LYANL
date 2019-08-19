@@ -6,9 +6,9 @@ class LinkedList {
 
   prepend = value => new LinkedList(value, this)
 
-  prependMany = (...values) => (
-    values.reduce((acc, value) => acc.prepend(value), this)
-  )
+  prependMany = (...values) => values.reduce((acc, value) => acc.prepend(value), this)
+
+  static fromArray = arr => new LinkedList().prependMany(...arr)
 
   toArray = (soFar = []) => (
     this.value === null
