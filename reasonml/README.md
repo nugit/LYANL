@@ -66,3 +66,17 @@
   - get(key) - Gets the value (will always be positive) of the key if the key exists in the cache, otherwise return -1.  
   - put(key, value) - Sets or inserts the value if the key is not already present. When the cache reached its capacity, it should invalidate the least recently used item before inserting a new item.  
   - *Related Leetcode Question: https://leetcode.com/problems/lru-cache/*
+
+## Contributing
+
+Install dependencies
+
+```bash
+yarn install
+```
+
+Run tests
+
+```bash
+yarn test
+```
