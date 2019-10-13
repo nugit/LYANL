@@ -1,0 +1,21 @@
+{
+  "name": "lyanl-reasonml",
+  "version": "0.1.0",
+  "repository": "https://github.com/nugit/LYANL.git",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "build": "bsb -make-world",
+    "start": "bsb -make-world -w",
+    "clean": "bsb -clean-world",
+    "test": "yarn run build && jest"
+  },
+  "devDependencies": {
+    "@glennsl/bs-jest": "^0.4.9",
+    "bs-platform": "^5.0.6",
+    "bsb-native": "^4.0.1100"
+  },
+  "dependencies": {
+    "jest": "^24.9.0"
+  }
+}
