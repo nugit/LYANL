@@ -17,10 +17,10 @@
 
 ### Data Structures:
 - Stack
-  - push(x): Pushes element x onto stack.  
-  - pop(): Removes the element on top of the stack.  
-  - top(): Gets the top element.  
-  - empty(): Returns whether the stack is empty.  
+  - push(x): Pushes element x onto stack. ✔️
+  - pop(): Removes the element on top of the stack. ✔️
+  - top(): Gets the top element. ✔️
+  - empty(): Returns whether the stack is empty. ✔️
 
 - Queue
   - push(x): Pushes element x to the back of queue.  
