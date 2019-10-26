@@ -37,7 +37,7 @@ case class BloomFilter[A](
     ).toInt
   }
 
-  def isEmpty: Boolean = bitset.isEmpty
+  lazy val isEmpty: Boolean = bitset.isEmpty
 }
 
 object BloomFilter {
