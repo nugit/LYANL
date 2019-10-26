@@ -33,16 +33,16 @@ getHashes :: Show a => BloomFilter -> a -> [Int]
 getHashes bloomFilter elem =
   let str = show elem
       seed = hashSeed bloomFilter
-  in map (\x -> hashWithSalt (seed + x) str) [1..(k bloomFilter)]
+  in map ((flip hashWithSalt str) . (seed +)) [1..(k bloomFilter)]
 
 insert :: Show a => a -> BloomFilter -> BloomFilter
 insert elem bloomFilter =
   let hashes = getHashes bloomFilter elem
-      newBitSet = foldl (\bf x -> BitSet.insert x bf) (bitset bloomFilter) hashes
+      newBitSet = foldl (flip BitSet.insert) (bitset bloomFilter) hashes
   in bloomFilter { bitset = newBitSet }
 
 member :: Show a => a -> BloomFilter -> Bool
 member elem bloomFilter =
   let hashes = getHashes bloomFilter elem
       bs = bitset bloomFilter
-  in all (\x -> BitSet.member x bs) hashes
+  in all (flip BitSet.member bs) hashes
