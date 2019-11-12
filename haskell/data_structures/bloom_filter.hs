@@ -41,6 +41,8 @@ insert elem bloomFilter =
       newBitSet = foldl (flip BitSet.insert) (bitset bloomFilter) hashes
   in bloomFilter { bitset = newBitSet }
 
+-- Returns whether an element *may be* present in the bloom filter.
+-- This function can yield false positives, but not false negatives.
 member :: Show a => a -> BloomFilter -> Bool
 member elem bloomFilter =
   let hashes = getHashes bloomFilter elem
